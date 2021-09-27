@@ -25,6 +25,7 @@ assert.numFailedAssertions = 0;
 
 /* tests */
 
+assertEquals(11, rb.reverseBinary(13));
 
 /* output test results */
 console.log(assert.numAssertions + " assertions, " + 
