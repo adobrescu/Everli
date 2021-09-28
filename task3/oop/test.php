@@ -56,3 +56,31 @@ assert($numLocations + 1 == count($repo->readAll()));
 $repo->deleteRecord($newRecordKey);
 assert($numLocations == count($repo->readAll()));
 
+/////////////////////////////////
+
+$repo = new ObservableRepository($shoppers);
+$repo->registerNotificationHandler('create', function () {
+    global $numRecords;
+
+    $numRecords ++;
+});
+
+$repo->registerNotificationHandler('delete', function () {
+    global $numRecords;
+
+    $numRecords --;
+});
+
+$numRecords0 = $numRecords = count($shoppers);
+
+$repo->createRecord(['id' => 'S1', 'lat' => 45.46, 'lng' => 11.03, 'enabled' => true]);
+$lastNewKey = $repo->createRecord(['id' => 'S1', 'lat' => 45.46, 'lng' => 11.03, 'enabled' => true]);
+
+assert($numRecords0 + 2 == $numRecords);
+
+$repo->deleteRecord($lastNewKey);
+
+assert($numRecords0 + 1 == $numRecords);
+
+echo 'No failed assertions' . PHP_EOL;
+
