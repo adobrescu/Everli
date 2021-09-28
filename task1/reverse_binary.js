@@ -36,6 +36,11 @@ function reverseBinary(n) {
     if ( typeof(n) != "number" ) {
         throw new Error("reverseBinary: given parameter must be a number");
     }
+    if ( n < 0) {
+        //do not deal with negative numbers (sign bit etc)
+        throw new Error("reverseBinary: given parameter must be a positive number");
+    }
+    
 }
 
 exports.reverseBinary = reverseBinary;
