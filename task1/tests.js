@@ -46,6 +46,10 @@ try {
     assert(true, "Parameter validation (integer)  exception thrown");
 }
 
+assertEquals(2n ** 3n, rb.getSignificantBitBitmask(13n)); // 0 ... 001101
+assertEquals(2n ** 4n, rb.getSignificantBitBitmask(16n + 2n)); // 0 ... 010010
+assertEquals(2n ** 7n, rb.getSignificantBitBitmask(255n));
+assertEquals(2n ** 8n, rb.getSignificantBitBitmask(256n));
 
 //assertEquals(11, rb.reverseBinary(13));
 
