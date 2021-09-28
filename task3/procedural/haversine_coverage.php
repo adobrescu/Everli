@@ -2,10 +2,7 @@
 
 const IN_RANGE_MAX_DISTANCE = 10; // km
 
-function calculateEnabledShoppersCoverage($shoppers, $locations) {
-    if ( !function_exists('haversine') ) {
-        die('A "haversine" function implementation is needed by "calculateEnabledShoppersCoverage"');
-    }    
+function calculateEnabledShoppersCoverage($shoppers, $locations) {  
 
     $numLocations = count($locations);
     $result = [];
