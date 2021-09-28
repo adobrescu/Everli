@@ -30,6 +30,9 @@ class Repository implements \IRepository
      * Adds new record from trusted source
      */
     function createRecord(array $record): int {
+        $this->records[] = $record;
+
+        return (int) key(end($this->records));
     }
     function deleteRecord(int $id) {
 
@@ -56,4 +59,6 @@ $numLocations = count($locations);
 $repo = new Repository($locations);
 assert($numLocations == count($repo->readAll()));
 
+$repo->createRecord(['id' => 1100, 'zip_code' => '37069', 'lat' => 45.35, 'lng' => 10.84]);
+assert($numLocations + 1 == count($repo->readAll()));
 
