@@ -22,6 +22,18 @@ Complete the source code file named `reverse_binary.js`.
 
 TASK 2
 
+!! My notes 
+    To run the code (class definition + tests) if change_directory.php has exec permissions:
+
+    cd Everli/task2/ ; ./change_directory.php;
+
+    Or (assuming that PHP CLI installed and in PATH):
+
+    cd Everli/task2/ ; php ./change_directory.php;
+
+
+!!
+
 - Language: PHP
 
 - Description:

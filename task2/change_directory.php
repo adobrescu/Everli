@@ -226,5 +226,5 @@
     $path->currentPath = '/a/b/c/../../B/C/';
     assert('/a/B/C' == $path->currentPath);
     
-    echo PHP_EOL;
+    echo 'No errors'.PHP_EOL;
     //should display '/a/b/c/x'. 
