@@ -1,0 +1,20 @@
+
+One simple & quick way to implement the task is to have 2 functions:
+
+ - one calculates the haversine between 2 points (given points latitude and longitude);
+ - one that loops throught shoppers and:
+    - skip disabled shoppers 
+    - and for each enabled shopper 
+        - loop throught locations and for each locations 
+            - calculates current shopper's haversine to current location and 
+                if harvesine < 10Km increments a valid/in range locations counter
+        - calculates current shopper coverage and add the shopper id & coverage to function result;
+
+Another way (more OOP oriented) would try to avoid to calculate the coverages for all shoppers everytime 
+and cache some of the calculations done, assuming that:
+
+- a location is fixed;
+- one or more locations can be removed or added to locations list;
+
+- shopper's activity involves "static" periods of time (their position doesn't change to much 
+so it can be considered fixed) so their coverage changes only when locations are added or removed;
