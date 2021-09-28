@@ -1,7 +1,15 @@
 # Everli
 
 TASK 1
-!!My notes: implements 2 versions of a function called "reverseBinary" - one using bitwise operators (in reverse_binary.js), and the second one using strings and arrays (reverse_binary_using_arrays.js)
+!! My notes 
+Task 1 implements 2 versions of a function called "reverseBinary" - one implemented using bitwise operators (in reverse_binary.js), and the second one using strings and arrays (reverse_binary_using_arrays.js)
+    
+    To run the tests from command line (assuming nodejs installed):
+
+    cd Everli/task1/tests/ ; node ./tests.js ; node ./tests_arrays.js
+
+    To run in browser open Everli/task1/index.html and view results in console output.
+!!    
 
 - Language: Javascript
 
