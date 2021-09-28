@@ -1,0 +1,6 @@
+
+For unsigned integers greater than 2 ** 31 - 1 the bitwise operators won't work properly (sign bit etc).
+JS numbers are 64bit numbers.
+
+Function reverseBinary needs to work with numbers up to 2 ** 64, so its input parameter 
+must be converted to a BigInt with a 64bit length.

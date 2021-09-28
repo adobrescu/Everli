@@ -32,6 +32,8 @@ try {
     assert(true, "Parameter validation exception thrown");
 }
 
+console.log(BigInt.asUintN(64, BigInt(128)));
+
 assertEquals(11, rb.reverseBinary(13));
 
 /* output test results */
