@@ -4,6 +4,7 @@ namespace Tests\A;
 
 include_once(__DIR__.'/interfaces.php');
 include_once(__DIR__.'/NotificationSource.trait.php');
+include(__DIR__.'/test-records.php');
 
 class NotificationSource implements \INotificationSource 
 {
@@ -16,15 +17,26 @@ class NotificationSource implements \INotificationSource
 
 class Repository implements \IRepository
 {
-    function createRecord(array $record) {
+    protected $records;
 
+    /**
+     * Creates repo object with records from a trusted source
+     */
+    public function __construct($records) {
+        $this->records = $records;
     }
-    function deleteRecord(integer $id) {
+
+    /**
+     * Adds new record from trusted source
+     */
+    function createRecord(array $record): int {
+    }
+    function deleteRecord(int $id) {
 
     }
 
     function readAll() {
-        
+        return $this->records;
     }
 }
 
@@ -37,3 +49,11 @@ $testVar = 0;
 $obj->test(); 
 
 assert($testVar == 1);
+
+/////////////////////////////////
+
+$numLocations = count($locations);
+$repo = new Repository($locations);
+assert($numLocations == count($repo->readAll()));
+
+
