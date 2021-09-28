@@ -47,7 +47,8 @@ function reverseBinary(n) {
     var bigintN = BigInt.asUintN(64, BigInt(n));
 }
 /**
- * Given a 64bit bigint number, returns a bitmsak containin only one bit set to 1 - number's first bit set to 1.
+ * Given a 64bit bigint number, returns the offset 
+ * of the number's first bit set to 1.
  * 
  * Eg:
  * 
@@ -55,23 +56,27 @@ function reverseBinary(n) {
  * 
  * returns:
  * 
- * 0000 .......00001000
+ * 3  
+ * ( bitmask: 0000 .......00001000)
  * 
  * @param {*} n 
  */
-function getSignificantBitBitmask(n) {
+function getSignificantBitOffset(n) {
     var ctrBitMask;
+    var bitPosition;
+
+    bitPosition = 63;
 
     for ( ctrBitMask = BigInt.asUintN(64, 2n ** 63n); 
         ctrBitMask >= 0; 
-        ctrBitMask >>= 1n ) {
+        ctrBitMask >>= 1n, bitPosition-- ) {
         if ( ( n & ctrBitMask ) == ctrBitMask ) {
             break;
         }
     }
 
-    return ctrBitMask;
+    return bitPosition;
 }
 
 exports.reverseBinary = reverseBinary;
-exports.getSignificantBitBitmask = getSignificantBitBitmask;
+exports.getSignificantBitOffset = getSignificantBitOffset;
