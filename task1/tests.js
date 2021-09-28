@@ -31,6 +31,7 @@ try {
 } catch (err) {
     assert(true, "Parameter validation exception thrown");
 }
+
 try {
     rb.reverseBinary(-13);
     assert(false, "Parameter validation (parameter >= 0 ) exception not thrown");
@@ -38,7 +39,15 @@ try {
     assert(true, "Parameter validation (parameter >= 0 )  exception thrown");
 }
 
-assertEquals(11, rb.reverseBinary(13));
+try {
+    rb.reverseBinary(13.05);
+    assert(false, "Parameter validation (integer) exception not thrown");
+} catch (err) {
+    assert(true, "Parameter validation (integer)  exception thrown");
+}
+
+
+//assertEquals(11, rb.reverseBinary(13));
 
 /* output test results */
 console.log(assert.numAssertions + " assertions, " + 
