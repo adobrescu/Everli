@@ -1,10 +1,12 @@
 <?php
 
-interface INotificationSource {
+interface INotificationSource
+{
     function registerNotificationHandler($notificationName, $callback);
 }
 
-interface IRepository {
+interface IRepository
+{
     function createRecord(array $record): int;
     function deleteRecord(integer $id);
 
