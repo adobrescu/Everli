@@ -1,5 +1,7 @@
 "use strict";
 
+// Maximum number of bits to safetly represent numbers in JS:
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 const MAX_SAFE_INTEGER_NUM_BITS = 53;
 const MAX_SAFE_INTEGER_NUM_BITS_BIGINT = 53n;
 
