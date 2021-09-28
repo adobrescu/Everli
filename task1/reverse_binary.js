@@ -36,10 +36,17 @@ function reverseBinary(n) {
     if ( typeof(n) != "number" ) {
         throw new Error("reverseBinary: given parameter must be a number");
     }
+    //@tbd is next validation needed?!
     if ( n < 0) {
         //do not deal with negative numbers (sign bit etc)
         throw new Error("reverseBinary: given parameter must be a positive number");
     }
+    
+    // convert n to a 64bit unsigned integer
+    // if n is not an integer then an excception is thrown
+    var bigintN = BigInt.asUintN(64, BigInt(n));
+    
+    //console.log(bigintN)
     
 }
 
