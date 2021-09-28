@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+    <html lang="en-US">
+        <head>
+            <script>
+                var exports = {};
+                var exports2;
+                var reverseBinary, reverseBinaryUsingArrays;
+            </script>
+            <script>
+                /* Save first module exports before loading the second module*/
+                function onLoadExports() {
+                    exports2 = exports; 
+                    exports = {};
+                }
+            </script>
+            <script src="reverse_binary.js" onload="onLoadExports();"></script>
+            <script src="reverse_binary_using_arrays.js"></script>
+            <script>
+                function bodyOnLoad() {
+                    reverseBinary = exports2.reverseBinary;
+                    reverseBinaryUsingArrays = exports.reverseBinary;
+                    
+                    console.log("Functions", reverseBinary.toString(), "\n", reverseBinaryUsingArrays.toString());
+
+                    var n = 13;
+
+                    console.log(reverseBinary(n));
+                    console.log(reverseBinaryUsingArrays(n));
+                }
+            </script>
+        </head>
+        <body onload="bodyOnLoad()">
+        </body>
+    </html>
