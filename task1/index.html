@@ -4,29 +4,78 @@
         <head>
             <script>
                 var exports = {};
-                var exports2;
+                var loadedExports = [];
                 var reverseBinary, reverseBinaryUsingArrays;
             </script>
             <script>
                 /* Save first module exports before loading the second module*/
                 function onLoadExports() {
-                    exports2 = exports; 
+                    loadedExports[loadedExports.length] = exports; 
                     exports = {};
                 }
             </script>
+            <script src="tests/assert.js" onload="onLoadExports();"></script>
             <script src="reverse_binary.js" onload="onLoadExports();"></script>
             <script src="reverse_binary_using_arrays.js"></script>
             <script>
                 function bodyOnLoad() {
-                    reverseBinary = exports2.reverseBinary;
+                    reverseBinary = loadedExports[1].reverseBinary;
                     reverseBinaryUsingArrays = exports.reverseBinary;
                     
-                    console.log("Functions", reverseBinary.toString(), "\n", reverseBinaryUsingArrays.toString());
-
+                    //console.log("Functions", reverseBinary.toString(), "\n", reverseBinaryUsingArrays.toString());
+                    /*
                     var n = 13;
 
                     console.log(reverseBinary(n));
                     console.log(reverseBinaryUsingArrays(n));
+                    */
+                    /* tests */
+                    // test reverseBinary
+                    try {
+                        reverseBinary("13");
+                        assert(false, "Parameter validation exception not thrown");
+                    } catch (err) {
+                        assert(true, "Parameter validation exception thrown");
+                    }
+
+                    try {
+                        reverseBinary(-13);
+                        assert(false, "Parameter validation (parameter >= 0 ) exception not thrown");
+                    } catch (err) {
+                        assert(true, "Parameter validation (parameter >= 0 )  exception thrown");
+                    }
+
+                    try {
+                        reverseBinary(13.05);
+                        assert(false, "Parameter validation (integer) exception not thrown");
+                    } catch (err) {
+                        assert(true, "Parameter validation (integer)  exception thrown");
+                    }
+
+                    assertEquals(3n, getSignificantBitOffset(13n)); // 0 ... 001101
+                    assertEquals(4n, getSignificantBitOffset(16n + 2n)); // 0 ... 010010
+                    assertEquals(7n, getSignificantBitOffset(255n));
+                    assertEquals(8n, getSignificantBitOffset(256n));
+
+                    assertEquals(11, reverseBinary(13));
+
+                    // any power of 2 should return 1
+                    // power of 2 + 1 returns the same pow of 2 + 1
+                    for ( var pow = 1 ; pow < MAX_SAFE_INTEGER_NUM_BITS; pow++ ) { 
+                        assertEquals(1, reverseBinary(2 ** pow));
+                        assertEquals(2 ** pow + 1, reverseBinary(2 ** pow + 1));
+                    }
+                    // test reverseBinaryUsingArrays
+                    // any power of 2 should return 1
+                    // power of 2 + 1 returns the same pow of 2 + 1
+                    for ( var pow = 1 ; pow < MAX_SAFE_INTEGER_NUM_BITS; pow++ ) { 
+                        assertEquals(1, reverseBinaryUsingArrays(2 ** pow));
+                        assertEquals(2 ** pow + 1, reverseBinaryUsingArrays(2 ** pow + 1));
+                    }
+
+                    /* output test results */
+                    console.log(assert.numAssertions + " assertions, " + 
+                        ( assert.numFailedAssertions > 0 ? assert.numFailedAssertions : "none"  ) + " failed");
                 }
             </script>
         </head>
