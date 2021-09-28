@@ -14,6 +14,20 @@ class NotificationSource implements \INotificationSource
     }
 }
 
+class Repository implements \IRepository
+{
+    function createRecord(array $record) {
+
+    }
+    function deleteRecord(integer $id) {
+
+    }
+
+    function readAll() {
+        
+    }
+}
+
 $obj = new NotificationSource();
 $obj->registerNotificationHandler('someEvent', function () {
     global $testVar;
