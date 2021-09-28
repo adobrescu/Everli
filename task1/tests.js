@@ -1,27 +1,9 @@
 
 let rb = require("./reverse_binary.js");
+let am /*AssertionsModule */ = require("./assert.js");
 
-/**
- * Dummy assert function
- */
-function assert(condition, failureMessage) {
-    if (!condition ) {
-        assert.numFailedAssertions++;
-        console.log(failureMessage);
-    }
-
-    assert.numAssertions++;
-}
-
-/**
- * Strict type 
- */
-function assertEquals (expectedValue, receivedValue) {
-    assert(expectedValue === receivedValue, "Expected value: " + expectedValue + ", received: " + receivedValue);
-}
-
-assert.numAssertions = 0;
-assert.numFailedAssertions = 0;
+let assert = am.assert;
+let assertEquals = am.assertEquals;
 
 /* tests */
 
