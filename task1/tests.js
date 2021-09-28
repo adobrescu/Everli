@@ -25,6 +25,13 @@ assert.numFailedAssertions = 0;
 
 /* tests */
 
+try {
+    rb.reverseBinary("13");
+    assert(false, "Parameter validation exception not thrown");
+} catch (err) {
+    assert(true, "Parameter validation exception thrown");
+}
+
 assertEquals(11, rb.reverseBinary(13));
 
 /* output test results */
