@@ -35,7 +35,7 @@ class Repository implements \IRepository
         return (int) key(end($this->records));
     }
     function deleteRecord(int $id) {
-
+        unset($this->records[$id]);
     }
 
     function readAll() {
@@ -59,6 +59,9 @@ $numLocations = count($locations);
 $repo = new Repository($locations);
 assert($numLocations == count($repo->readAll()));
 
-$repo->createRecord(['id' => 1100, 'zip_code' => '37069', 'lat' => 45.35, 'lng' => 10.84]);
+$newRecordKey = $repo->createRecord(['id' => 1100, 'zip_code' => '37069', 'lat' => 45.35, 'lng' => 10.84]);
 assert($numLocations + 1 == count($repo->readAll()));
+
+$repo->deleteRecord($newRecordKey);
+assert($numLocations == count($repo->readAll()));
 
