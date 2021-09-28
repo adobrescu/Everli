@@ -45,9 +45,33 @@ function reverseBinary(n) {
     // convert n to a 64bit unsigned integer
     // if n is not an integer then an excception is thrown
     var bigintN = BigInt.asUintN(64, BigInt(n));
-    
-    //console.log(bigintN)
-    
+}
+/**
+ * Given a 64bit bigint number, returns a bitmsak containin only one bit set to 1 - number's first bit set to 1.
+ * 
+ * Eg:
+ * 
+ * 0000 ...... 00001101
+ * 
+ * returns:
+ * 
+ * 0000 .......00001000
+ * 
+ * @param {*} n 
+ */
+function getSignificantBitBitmask(n) {
+    var ctrBitMask;
+
+    for ( ctrBitMask = BigInt.asUintN(64, 2n ** 63n); 
+        ctrBitMask >= 0; 
+        ctrBitMask >>= 1n ) {
+        if ( ( n & ctrBitMask ) == ctrBitMask ) {
+            break;
+        }
+    }
+
+    return ctrBitMask;
 }
 
 exports.reverseBinary = reverseBinary;
+exports.getSignificantBitBitmask = getSignificantBitBitmask;
