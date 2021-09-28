@@ -1,9 +1,11 @@
 
-For unsigned integers greater than 2 ** 31 - 1 the bitwise operators won't work properly (sign bit etc).
+About implementation using bitwise operators:
+
+- For unsigned integers greater than 2 ** 31 - 1 the bitwise operators won't work properly (sign bit etc).
 JS numbers are 64bit numbers.
 
-Function reverseBinary needs to work with numbers up to 2 ** 64, so its input parameter 
+- Function reverseBinary needs to work with numbers up to 2 ** 64, so its input parameter 
 must be converted to a BigInt with a 64bit length.
 
-Integers are safely represented by 53 bits:
+- Integers are safely represented by 53 bits:
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
