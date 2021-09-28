@@ -8,7 +8,7 @@ interface INotificationSource
 interface IRepository
 {
     function createRecord(array $record): int;
-    function deleteRecord(integer $id);
+    function deleteRecord(int $id);
 
     function readAll();
 }
