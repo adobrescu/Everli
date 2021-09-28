@@ -46,12 +46,24 @@ try {
     assert(true, "Parameter validation (integer)  exception thrown");
 }
 
-assertEquals(3, rb.getSignificantBitOffset(13n)); // 0 ... 001101
-assertEquals(4, rb.getSignificantBitOffset(16n + 2n)); // 0 ... 010010
-assertEquals(7, rb.getSignificantBitOffset(255n));
-assertEquals(8, rb.getSignificantBitOffset(256n));
+assertEquals(3n, rb.getSignificantBitOffset(13n)); // 0 ... 001101
+assertEquals(4n, rb.getSignificantBitOffset(16n + 2n)); // 0 ... 010010
+assertEquals(7n, rb.getSignificantBitOffset(255n));
+assertEquals(8n, rb.getSignificantBitOffset(256n));
 
-//assertEquals(11, rb.reverseBinary(13));
+assertEquals(11, rb.reverseBinary(13));
+
+// any power of 2 should return 1
+// power of 2 + 1 returns the same pow of 2 + 1
+
+for ( var pow = 1 ; pow <= 53; pow++ ) { 
+    assertEquals(1, rb.reverseBinary(1));
+    
+    if ( pow == 53 ) {
+        continue;
+    }
+    assertEquals(2 ** pow + 1, rb.reverseBinary(2 ** pow + 1));
+}
 
 /* output test results */
 console.log(assert.numAssertions + " assertions, " + 
