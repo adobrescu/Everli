@@ -1,6 +1,7 @@
 # Everli
 
 TASK 1
+!!My notes: implements 2 versions of a function called "reverseBinary" - one using bitwise operators (in reverse_binary.js), and the second one using strings and arrays (reverse_binary_using_arrays.js)
 
 - Language: Javascript
 
