@@ -2,7 +2,7 @@
 
 const IN_RANGE_MAX_DISTANCE = 10; // km
 
-function calculateShoppersCoverage($shoppers, $locations) {
+function calculateEnabledShoppersCoverage($shoppers, $locations) {
         
     $numLocations = count($locations);
     $result = [];

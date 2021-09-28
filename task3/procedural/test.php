@@ -41,7 +41,7 @@
     // Also, shopper's order change in calculateShoppersCoverage result
     // So all expected values are calculated "manually"
 
-    $result = calculateShoppersCoverage( $shoppers, $locations);
+    $result = calculateEnabledShoppersCoverage( $shoppers, $locations);
 
     assert(5 == count($result));//7 shoppers - 2 disabled
 
