@@ -12,3 +12,7 @@ interface IRepository
 
     function readAll();
 }
+
+interface IObservableRepository extends INotificationSource, IRepository
+{
+}

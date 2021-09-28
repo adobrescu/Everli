@@ -2,7 +2,7 @@
 
 include_once(__DIR__.'/interfaces.php');
 
-class ObservableRepository extends Repository implements INotificationSource, IRepository
+class ObservableRepository extends Repository implements IObservableRepository
 {
     use TNotificationSource;
 
