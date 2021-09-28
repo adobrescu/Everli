@@ -57,6 +57,18 @@ Complete the source file named `change_directory.php`.
 
 TASK 3
 
+!! My notes 
+
+1. One simple implementation is found in task3/procedural/haversine_coverage.php.
+The function that implements coverages calculation (calculateEnabledShoppersCoverage) is done in a "if it fails, it fails hard" way:
+
+- it doesn't check its input/parameters for their type (array) 
+   or their entries (array elements have the right keys and values);
+- it expects that a function called 'haversine' is already defined;
+
+
+!!
+
 - Language: PHP
 
 - Description:
