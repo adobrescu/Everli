@@ -8,7 +8,7 @@ const MAX_SAFE_INTEGER_NUM_BITS_BIGINT = 53n;
 /**
  * Reverse bits for a given number.
  *  
- * It reverses all or just  number's "significant" bits.
+ * It reverses number's "significant" bits.
  * "Significant" bits start with the first bit that has a value of 1.
  * 
  *  
@@ -24,18 +24,19 @@ const MAX_SAFE_INTEGER_NUM_BITS_BIGINT = 53n;
  * Eg:
  * 
  * Given a number on 64 bit: 
- * 000000 ...... 00001101 (64 bit for "13")
+ * 000000 ....... 00001101 (64 bit for "13")
  * 
  * - reverse "significant" bits:
  * 000000 ....... 00001011 (64 bit for "11") 
  * 
- * - reverse all bits:
+ * - reverse all bits (not implemented):
  * 110100 ....... 00000000
  * 
  * Number of bits of a number is 64:
  * https://www.w3schools.com/js/js_numbers.asp
  * 
- * @param {number} n 
+ * @param {number} n - Number to reverse
+ * @returns n with "significant" bits reversed
  */
 function reverseBinary(n) {
     if ( typeof(n) != "number" ) {
@@ -83,6 +84,7 @@ function reverseBinary(n) {
  * ( bitmask: 0000 .......00001000)
  * 
  * @param {*} n 
+ * @returns number of "significant" bits minus one (the offset of the first "significant" bit)
  */
 function getSignificantBitOffset(n) {
     var ctrBitMask;
@@ -101,6 +103,7 @@ function getSignificantBitOffset(n) {
     return bitPosition;
 }
 
+/* module exports --------------------------------------------------------------*/
 exports.MAX_SAFE_INTEGER_NUM_BITS = MAX_SAFE_INTEGER_NUM_BITS; 
 exports.reverseBinary = reverseBinary;
 exports.getSignificantBitOffset = getSignificantBitOffset;
