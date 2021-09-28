@@ -6,11 +6,42 @@
         const ERR_INVALID_PATH = 2001;
         const ERR_INVALID_PATH_FORMAT = 2002;
 
-        public $currentPath;
+        protected $currentPath;
 
         public function __construct($currentPath) {
             $this->currentPath = $currentPath;
         }
+        
+        public function &__get($propertyName) {
+            if ( $propertyName == 'currentPath' ) {
+                return $this->currentPath;
+            }
+        }
+
+        public function __set($propertyName, $propertyValue) {
+            if ( $propertyName == 'currentPath' ) {
+                return $this->setCurrentPath($propertyValue);
+            }
+        }
+
+        public function setCurrentPath($newCurrentPath) {
+            if ( $newCurrentPath[0] != '/' ) {
+                throw new Exception('Invalid current path: current path must start with "/"', static::ERR_INVALID_PATH);
+            }
+            //save current path
+            //on error restore it
+            $oldCurrentPath = $this->currentPath;
+            $this->currentPath = '/';
+            try {
+                $this->cd($newCurrentPath);
+            } catch (Exception $err) {
+                //restore old path
+                $this->currentPath = $oldCurrentPath;
+
+                throw $err;
+            }
+        }
+
         public function cd($relativePath) {
             //not clear if "the function will not be passed any invalid paths"
             // also refers to "directory names consist only of English alphabet letters (A-Z and a-z).
@@ -163,5 +194,36 @@
     } catch (Exception $err) {
     }
 
+    //test setting current path
+    $path->currentPath = '/a/b/c';
+    assert('/a/b/c' == $path->currentPath);
+
+    try {
+        $path->currentPath = './a/b/c';
+        assert(false, 'Validation error not thrown');
+    } catch (Exception $err) {
+        assert($err->getCode() == Path::ERR_INVALID_PATH);
+        assert('/a/b/c' == $path->currentPath);
+    }
+
+    try {
+        $path->currentPath = '../a/b/c';
+        assert(false, 'Validation error not thrown');
+    } catch (Exception $err) {
+        assert($err->getCode() == Path::ERR_INVALID_PATH);
+        assert('/a/b/c' == $path->currentPath);
+    }
+
+    try {
+        $path->currentPath = 'x/a/b/c';
+        assert(false, 'Validation error not thrown');
+    } catch (Exception $err) {
+        assert($err->getCode() == Path::ERR_INVALID_PATH);
+        assert('/a/b/c' == $path->currentPath);
+    }
+
+    $path->currentPath = '/a/b/c/../../B/C/';
+    assert('/a/B/C' == $path->currentPath);
+    
     echo PHP_EOL;
     //should display '/a/b/c/x'. 
