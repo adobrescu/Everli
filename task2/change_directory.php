@@ -37,4 +37,32 @@
 
     $path->cd('./b/c/../../../../../../x/y');
     assert('/a/x/y' == $path->currentPath);
+    
+    //test path validation
+    
+    assert('/a/b/c' == Path::sanitizeRelativePath('//a/b///c/'));
+    assert('a/b/c' == Path::sanitizeRelativePath('a/b///c/'));
+
+    assert('../a/b/c' == Path::sanitizeRelativePath('../a/b///c/'));
+    assert('/../a/b/c' == Path::sanitizeRelativePath('/../a/b///c/'));
+
+    assert('./a/b/c' == Path::sanitizeRelativePath('./a/b///c/'));
+    assert('/./a/b/c' == Path::sanitizeRelativePath('/./a/b///c/'));
+
+    assert('../a/b/./../c' == Path::sanitizeRelativePath('../a/b///./../c/'));
+    assert('/../a/b/c/.' == Path::sanitizeRelativePath('/../a/b///c/./'));
+    
+    try {
+        Path::sanitizeRelativePath('..a/a/b///./../c/');
+        assert(false, 'Validation error not thrown');
+    } catch (Exception $err) {
+    }
+    
+    try {
+        Path::sanitizeRelativePath('a../a/b///./../c/');
+        assert(false, 'Validation error not thrown');
+    } catch (Exception $err) {
+    }
+
+    echo PHP_EOL;
     //should display '/a/b/c/x'. 

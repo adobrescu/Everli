@@ -3,6 +3,7 @@
 class Path
 {
     const ERR_INVALID_PATH = 2001;
+    const ERR_INVALID_PATH_FORMAT = 2002;
 
     public $currentPath;
 
@@ -10,6 +11,10 @@ class Path
         $this->currentPath = $currentPath;
     }
     public function cd($relativePath) {
+        //not clear if "the function will not be passed any invalid paths"
+        // also refers to "directory names consist only of English alphabet letters (A-Z and a-z).
+        //$relativePath = static::sanitizeRelativePath($relativePath);
+
         $currentPath = $this->currentPath;
 
         /**
@@ -67,5 +72,29 @@ class Path
         } else {
             $this->currentPath = implode('/', $stack);
         }
+    }
+
+    /**
+     * Sanitize a relative path. On error throws an ERR_INVALID_PATH_FORMAT exception.
+     * returns sanitized path
+     */
+    static public function sanitizeRelativePath($relativePath) {
+        //remove multiple '/'
+        $relativePath = preg_replace('/[\/]{2,}/', '/', $relativePath);
+
+        //remove trailing '/'
+        $relativePath = preg_replace('/[\/]$/', '', $relativePath);
+
+        // path component allows a-z characters, ".." (2 dots) and "." ("one dot)
+        $rpcp /*relativePathComponentPattern*/ = '\.|\.\.|[a-z]+';
+
+        //path pattern starts with 0 - 1 path component followed by one or more 
+        // '/' followed by a path component
+        $relativePathPattern = '^('.$rpcp.'){0,1}(\/('.$rpcp.'))*$';
+        if ( !preg_match('/'.$relativePathPattern.'/i', $relativePath)) {
+            throw new Exception('Invalid path format: '.$relativePath, static::ERR_INVALID_PATH_FORMAT);
+        }
+        
+        return $relativePath;
     }
 }
