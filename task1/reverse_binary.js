@@ -44,7 +44,25 @@ function reverseBinary(n) {
     
     // convert n to a 64bit unsigned integer
     // if n is not an integer then an excception is thrown
-    var bigintN = BigInt.asUintN(64, BigInt(n));
+    var bigintN, sbPosition, bigintReversedN;
+    
+    bigintN = BigInt.asUintN(64, BigInt(n));
+    bigintReversedN = BigInt.asUintN(64, BigInt(0));
+    sbPosition = getSignificantBitOffset(bigintN);
+    var ctrlBitmask = 2n ** sbPosition;
+    var pos = 0n;
+    //deal with last sbPosition bits in bigintN
+    for ( ctrlBitmask = 2n ** sbPosition;
+        ctrlBitmask > 0n;
+        ctrlBitmask >>= 1n, pos++) {
+        
+        if ( (ctrlBitmask & bigintN) == 0n ) {
+            continue;
+        }
+
+        bigintReversedN |= ( 1n <<  pos );
+    }
+    return Number(bigintReversedN);
 }
 /**
  * Given a 64bit bigint number, returns the offset 
@@ -65,7 +83,7 @@ function getSignificantBitOffset(n) {
     var ctrBitMask;
     var bitPosition;
 
-    bitPosition = 63;
+    bitPosition = 63n;
 
     for ( ctrBitMask = BigInt.asUintN(64, 2n ** 63n); 
         ctrBitMask >= 0; 
