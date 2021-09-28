@@ -1,5 +1,5 @@
 
-let rb = require("./reverse_binary.js");
+let rb = require("./../reverse_binary.js");
 let am /*AssertionsModule */ = require("./assert.js");
 
 let assert = am.assert;
