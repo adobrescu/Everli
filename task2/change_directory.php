@@ -198,6 +198,7 @@
     $path->currentPath = '/a/b/c';
     assert('/a/b/c' == $path->currentPath);
 
+    //all path starting with something different than "/" should throw an exception
     try {
         $path->currentPath = './a/b/c';
         assert(false, 'Validation error not thrown');
