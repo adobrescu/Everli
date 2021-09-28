@@ -5,6 +5,7 @@ namespace Tests\A;
 include_once(__DIR__.'/interfaces.php');
 include_once(__DIR__.'/NotificationSource.trait.php');
 include_once(__DIR__.'/Repository.class.php');
+include_once(__DIR__.'/ObservableRepository.class.php');
 include(__DIR__.'/test-records.php');
 
 class NotificationSource implements \INotificationSource 
@@ -42,7 +43,7 @@ assert($numLocations == count($repo->readAll()));
 
 /////////////////////////////////
 
-$repo = new ObservableRepository($shoppers);
+$repo = new \ObservableRepository($shoppers);
 $repo->registerNotificationHandler('create', function () {
     global $numRecords;
 
