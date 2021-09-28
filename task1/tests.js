@@ -31,8 +31,12 @@ try {
 } catch (err) {
     assert(true, "Parameter validation exception thrown");
 }
-
-console.log(BigInt.asUintN(64, BigInt(128)));
+try {
+    rb.reverseBinary(-13);
+    assert(false, "Parameter validation (parameter >= 0 ) exception not thrown");
+} catch (err) {
+    assert(true, "Parameter validation (parameter >= 0 )  exception thrown");
+}
 
 assertEquals(11, rb.reverseBinary(13));
 
