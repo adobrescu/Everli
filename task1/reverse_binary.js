@@ -1,5 +1,8 @@
 "use strict";
 
+const MAX_SAFE_INTEGER_NUM_BITS = 53;
+const MAX_SAFE_INTEGER_NUM_BITS_BIGINT = 53n;
+
 /**
  * Reverse bits for a given number.
  *  
@@ -46,8 +49,8 @@ function reverseBinary(n) {
     // if n is not an integer then an excception is thrown
     var bigintN, sbPosition, bigintReversedN;
     
-    bigintN = BigInt.asUintN(64, BigInt(n));
-    bigintReversedN = BigInt.asUintN(64, BigInt(0));
+    bigintN = BigInt.asUintN(MAX_SAFE_INTEGER_NUM_BITS, BigInt(n));
+    bigintReversedN = BigInt.asUintN(MAX_SAFE_INTEGER_NUM_BITS, BigInt(0));
     sbPosition = getSignificantBitOffset(bigintN);
     var ctrlBitmask = 2n ** sbPosition;
     var pos = 0n;
@@ -83,9 +86,9 @@ function getSignificantBitOffset(n) {
     var ctrBitMask;
     var bitPosition;
 
-    bitPosition = 63n;
+    bitPosition = (MAX_SAFE_INTEGER_NUM_BITS_BIGINT - 1n);
 
-    for ( ctrBitMask = BigInt.asUintN(64, 2n ** 63n); 
+    for ( ctrBitMask = BigInt.asUintN(MAX_SAFE_INTEGER_NUM_BITS, 2n ** (MAX_SAFE_INTEGER_NUM_BITS_BIGINT - 1n)); 
         ctrBitMask >= 0; 
         ctrBitMask >>= 1n, bitPosition-- ) {
         if ( ( n & ctrBitMask ) == ctrBitMask ) {
@@ -96,5 +99,6 @@ function getSignificantBitOffset(n) {
     return bitPosition;
 }
 
+exports.MAX_SAFE_INTEGER_NUM_BITS = MAX_SAFE_INTEGER_NUM_BITS; 
 exports.reverseBinary = reverseBinary;
 exports.getSignificantBitOffset = getSignificantBitOffset;
