@@ -16,7 +16,10 @@ class NotificationSource implements \INotificationSource
     }
 }
 
-
+class ObservableRepository extends \Repository implements \INotificationSource, \IRepository
+{
+    use \TNotificationSource;
+}
 
 $obj = new NotificationSource();
 $obj->registerNotificationHandler('someEvent', function () {
