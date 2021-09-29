@@ -2,6 +2,11 @@
 
 include_once(__DIR__.'/interfaces.php');
 
+/**
+ * Implements both IRepository and INotificationSource interfaces.
+ * An ObservableRepository instance triggers appropriate notifications when a new object is added to the repository,
+ * or an existing one is updated or deleted.
+ */
 class ObservableRepository extends Repository implements IObservableRepository
 {
     use TNotificationSource;
