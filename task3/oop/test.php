@@ -60,22 +60,6 @@ class ShoppersCoverageCalculator
         $this->shoppersNearByLocationIds[$shopperId] = static::calculateShopperNearByLocationsFromLocations($shopper, $this->locations->readAll(), $this->coverageMaxDistance);
     }
 
-    static public function calculateShopperNearByLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
-        $nearByLocations = [];
-
-        foreach ( $locations as $location ) {
-            $distance = static::haversine($shopper['lat'], $shopper['lng'], $location['lat'], $location['lng']);
-
-            if( $distance >= $coverageMaxDistance ) {
-                continue;
-            }
-
-            $locationId =  $location['id'];
-            $nearByLocations[ $locationId] = $locationId;
-        }
-
-        return $nearByLocations;
-    }
     public function getAllShoppersCoverage() {
         $result = [];
         $numLocations = $this->locations->countAll();
@@ -100,7 +84,26 @@ class ShoppersCoverageCalculator
         }
         return 0;
     }
+    /**
+     * Given a shopper, a list of locations and a range maximum distance,
+     * returns a list of locations that are in shopper's coverage.
+     */
+    static public function calculateShopperNearByLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
+        $nearByLocations = [];
 
+        foreach ( $locations as $location ) {
+            $distance = static::haversine($shopper['lat'], $shopper['lng'], $location['lat'], $location['lng']);
+
+            if( $distance >= $coverageMaxDistance ) {
+                continue;
+            }
+
+            $locationId =  $location['id'];
+            $nearByLocations[ $locationId] = $locationId;
+        }
+
+        return $nearByLocations;
+    }
     static public function haversine($lat1, $lng1, $lat2, $lng2) {
 
     }
