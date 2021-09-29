@@ -29,4 +29,7 @@ class Repository implements IRepository
     function readAll() {
         return $this->records;
     }
+    public function countAll() {
+        return count($this->records);
+    }
 }
