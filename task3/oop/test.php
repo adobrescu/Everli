@@ -140,9 +140,26 @@ class ShoppersCoverageCalculator
 
 class TestShoppersCoverageCalculator extends ShoppersCoverageCalculator
 {
-    static public function haversine($lat1, $lng1, $lat2, $lng2) {
+    /*
+     * Overrides parent's method only to allow resetting ::haversine # of calls counter
+     */
+    static public function calculateShopperCoveredLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
+        $result = parent::calculateShopperCoveredLocationsFromLocations($shopper, $locations, $coverageMaxDistance);
+        
+        self::haversine(0, 0, 0, 0, true);
+        
+        return $result;
+    }
+    /*
+        $reset allows resetting  number of calls counter - testing purposes
+    */
+    static public function haversine($lat1, $lng1, $lat2, $lng2, $reset = false) {
         static $numCalls = 0;
         
+        if ($reset ) {
+            $numCalls = 0;
+            return;
+        }
         return ( $numCalls++ % 3 ) * ShoppersCoverageCalculator::COVERAGE_MAX_DISTANCE;
     }
 }
@@ -218,6 +235,10 @@ assert(50 == $result[1]['coverage']);
 assert(25 == $result[2]['coverage']);
 assert(25 == $result[3]['coverage']);
 assert(25 == $result[4]['coverage']);
+
+// Test ShoppersCoverageCalculator repos notification handlers
+//add a new enabled shopper
+//getAllShoppersCoverage must return one more entry in its result
 
 echo 'No failed assertions' . PHP_EOL;
 
