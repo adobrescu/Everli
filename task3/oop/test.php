@@ -28,7 +28,7 @@ class ShoppersCoverageCalculator
     protected $shoppers;
     protected $locations;
 
-    protected $shoppersNearByLocationIds = [];
+    protected $shoppersCoveredLocationIds = [];
 
     public function __construct(\IObservableRepository $shoppers, 
                                 \IObservableRepository $locations,
@@ -38,31 +38,31 @@ class ShoppersCoverageCalculator
         $this->coverageMaxDistance = $coverageMaxDistance;
 
         foreach ($this->shoppers->readAll() as $shopper ) {
-            $this->calculateShopperNearByLocationIds($shopper);
+            $this->calculateShopperCoveredLocationIds($shopper);
         }
     }
 
-    public function calculateShopperNearByLocationIds($shopper) {
+    public function calculateShopperCoveredLocationIds($shopper) {
         if ( !$shopper['enabled'] ) {
             return;
         }
         $shopperId = $shopper['id'];
 
-        if (!isset($this->shoppersNearByLocationIds[$shopperId])) {
-            $this->shoppersNearByLocationIds[$shopperId] = [];
+        if (!isset($this->shoppersCoveredLocationIds[$shopperId])) {
+            $this->shoppersCoveredLocationIds[$shopperId] = [];
         }
 
-        $this->shoppersNearByLocationIds[$shopperId] = static::calculateShopperNearByLocationsFromLocations($shopper, $this->locations->readAll(), $this->coverageMaxDistance);
+        $this->shoppersCoveredLocationIds[$shopperId] = static::calculateShopperCoveredLocationsFromLocations($shopper, $this->locations->readAll(), $this->coverageMaxDistance);
     }
 
     public function getAllShoppersCoverage() {
         $result = [];
         $numLocations = $this->locations->countAll();
         
-        foreach ( $this->shoppersNearByLocationIds as $shopperId => $nearByLocationIds) {
-            $shopperNumNearByLocations = count($nearByLocationIds);
+        foreach ( $this->shoppersCoveredLocationIds as $shopperId => $coveredLocationIds) {
+            $shopperNumCoveredLocations = count($coveredLocationIds);
 
-            $result[] = [ 'shopper_id' => $shopperId, 'coverage' => 100 * $shopperNumNearByLocations / $numLocations];
+            $result[] = [ 'shopper_id' => $shopperId, 'coverage' => 100 * $shopperNumCoveredLocations / $numLocations];
         }
 
         usort($result, [$this, 'static::compareShoppersCoverageDesc']);
@@ -83,8 +83,8 @@ class ShoppersCoverageCalculator
      * Given a shopper, a list of locations and a range maximum distance,
      * returns a list of locations that are in shopper's coverage.
      */
-    static public function calculateShopperNearByLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
-        $nearByLocations = [];
+    static public function calculateShopperCoveredLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
+        $coveredLocations = [];
 
         foreach ( $locations as $location ) {
             $distance = static::haversine($shopper['lat'], $shopper['lng'], $location['lat'], $location['lng']);
@@ -94,10 +94,10 @@ class ShoppersCoverageCalculator
             }
 
             $locationId =  $location['id'];
-            $nearByLocations[ $locationId] = $locationId;
+            $coveredLocations[ $locationId] = $locationId;
         }
 
-        return $nearByLocations;
+        return $coveredLocations;
     }
     static public function haversine($lat1, $lng1, $lat2, $lng2) {
 
