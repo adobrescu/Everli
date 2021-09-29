@@ -33,7 +33,7 @@ class ShoppersCoverageCalculator
     protected $shoppers;
     protected $locations;
 
-    protected $shoppersCoverage = [];
+    protected $shoppersNearByLocationIds = [];
 
     public function __construct(\IObservableRepository $shoppers, 
                                 \IObservableRepository $locations,
@@ -53,11 +53,11 @@ class ShoppersCoverageCalculator
         }
         $shopperId = $shopper['id'];
 
-        if (!isset($this->shoppersCoverage[$shopperId])) {
-            $this->shoppersCoverage[$shopperId] = [];
+        if (!isset($this->shoppersNearByLocationIds[$shopperId])) {
+            $this->shoppersNearByLocationIds[$shopperId] = [];
         }
 
-        $this->shoppersCoverage[$shopperId] = $this->calculateShopperNearByLocations($shopper, $this->locations->readAll());
+        $this->shoppersNearByLocationIds[$shopperId] = $this->calculateShopperNearByLocations($shopper, $this->locations->readAll());
     }
 
     public function calculateShopperNearByLocations($shopper, $locations) {
@@ -80,7 +80,7 @@ class ShoppersCoverageCalculator
         $result = [];
         $numLocations = $this->locations->countAll();
         
-        foreach ( $this->shoppersCoverage as $shopperId => $nearByLocationIds) {
+        foreach ( $this->shoppersNearByLocationIds as $shopperId => $nearByLocationIds) {
             $shopperNumNearByLocations = count($nearByLocationIds);
 
             $result[] = [ 'shopper_id' => $shopperId, 'coverage' => 100 * $shopperNumNearByLocations / $numLocations];
