@@ -141,16 +141,6 @@ class ShoppersCoverageCalculator
 class TestShoppersCoverageCalculator extends ShoppersCoverageCalculator
 {
     /*
-     * Overrides parent's method only to allow resetting ::haversine # of calls counter
-     */
-    static public function calculateShopperCoveredLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
-        $result = parent::calculateShopperCoveredLocationsFromLocations($shopper, $locations, $coverageMaxDistance);
-        
-        self::haversine(0, 0, 0, 0, true);
-        
-        return $result;
-    }
-    /*
         $reset allows resetting  number of calls counter - testing purposes
     */
     static public function haversine($lat1, $lng1, $lat2, $lng2, $reset = false) {
