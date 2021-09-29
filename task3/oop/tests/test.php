@@ -2,11 +2,11 @@
 
 namespace Tests\A;
 
-include_once(__DIR__.'/interfaces.php');
-include_once(__DIR__.'/NotificationSource.trait.php');
-include_once(__DIR__.'/Repository.class.php');
-include_once(__DIR__.'/ObservableRepository.class.php');
-include_once(__DIR__.'/ShoppersCoverageCalculator.class.php');
+include_once(__DIR__.'/../interfaces.php');
+include_once(__DIR__.'/../NotificationSource.trait.php');
+include_once(__DIR__.'/../Repository.class.php');
+include_once(__DIR__.'/../ObservableRepository.class.php');
+include_once(__DIR__.'/../ShoppersCoverageCalculator.class.php');
 include(__DIR__.'/test-records.php');
 
 class NotificationSource implements \INotificationSource 
