@@ -18,8 +18,10 @@ class Repository implements IRepository
      */
     function createRecord(array $record): int {
         $this->records[] = $record;
-
-        return (int) key(end($this->records));
+        
+        end($this->records);
+        
+        return (int) key($this->records);
     }
     
     function updateRecord(int $key, array $record) {
