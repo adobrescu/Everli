@@ -17,11 +17,6 @@ class NotificationSource implements \INotificationSource
     }
 }
 
-class ShopperCoverage
-{
-    public $nearByLocationIds;
-}
-
 class ShoppersCoverageCalculator
 {
     const COVERAGE_MAX_DISTANCE = 10;
