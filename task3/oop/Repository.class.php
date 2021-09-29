@@ -23,11 +23,16 @@ class Repository implements IRepository
         
         return (int) key($this->records);
     }
-    
+    /**
+     * Updates an existing record from trusted source
+     */
     function updateRecord(int $key, array $record) {
         $this->records[$key] = $record;
     }
 
+    /**
+     * Deletes an existing record, given a valid record repo internal key/id
+     */
     function deleteRecord(int $key) {
         unset($this->records[$key]);
     }
