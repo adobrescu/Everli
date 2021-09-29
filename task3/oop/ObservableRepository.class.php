@@ -14,6 +14,14 @@ class ObservableRepository extends Repository implements IObservableRepository
         return $newRecordKey;
     }
     
+    function updateRecord(int $key, array $record) {
+        $oldRecord = $this->records[$key];
+
+        $this->records[$key] = $record;
+
+        $this->callNotificationHandlers('update', [$oldRecord, $record]);
+    }
+
     function deleteRecord(int $id) {
         $recordToDelete = $this->records[$id];
 
