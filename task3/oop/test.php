@@ -57,10 +57,10 @@ class ShoppersCoverageCalculator
             $this->shoppersNearByLocationIds[$shopperId] = [];
         }
 
-        $this->shoppersNearByLocationIds[$shopperId] = $this->calculateShopperNearByLocations($shopper, $this->locations->readAll());
+        $this->shoppersNearByLocationIds[$shopperId] = $this->calculateShopperNearByLocationsFromLocations($shopper, $this->locations->readAll());
     }
 
-    public function calculateShopperNearByLocations($shopper, $locations) {
+    public function calculateShopperNearByLocationsFromLocations($shopper, $locations) {
         $nearByLocations = [];
 
         foreach ( $locations as $location ) {
