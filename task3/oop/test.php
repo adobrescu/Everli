@@ -43,11 +43,11 @@ class ShoppersCoverageCalculator
         $this->coverageMaxDistance = $coverageMaxDistance;
 
         foreach ($this->shoppers->readAll() as $shopper ) {
-            $this->calculateShopperCoverage($shopper);
+            $this->calculateShopperNearByLocationIds($shopper);
         }
     }
 
-    public function calculateShopperCoverage($shopper) {
+    public function calculateShopperNearByLocationIds($shopper) {
         if ( !$shopper['enabled'] ) {
             return;
         }
