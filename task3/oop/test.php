@@ -57,16 +57,16 @@ class ShoppersCoverageCalculator
             $this->shoppersNearByLocationIds[$shopperId] = [];
         }
 
-        $this->shoppersNearByLocationIds[$shopperId] = $this->calculateShopperNearByLocationsFromLocations($shopper, $this->locations->readAll());
+        $this->shoppersNearByLocationIds[$shopperId] = static::calculateShopperNearByLocationsFromLocations($shopper, $this->locations->readAll(), $this->coverageMaxDistance);
     }
 
-    public function calculateShopperNearByLocationsFromLocations($shopper, $locations) {
+    static public function calculateShopperNearByLocationsFromLocations($shopper, $locations, $coverageMaxDistance) {
         $nearByLocations = [];
 
         foreach ( $locations as $location ) {
             $distance = static::haversine($shopper['lat'], $shopper['lng'], $location['lat'], $location['lng']);
 
-            if( $distance >= $this->coverageMaxDistance ) {
+            if( $distance >= $coverageMaxDistance ) {
                 continue;
             }
 
@@ -101,7 +101,7 @@ class ShoppersCoverageCalculator
         return 0;
     }
 
-    public function haversine($lat1, $lng1, $lat2, $lng2) {
+    static public function haversine($lat1, $lng1, $lat2, $lng2) {
 
     }
 }
@@ -109,12 +109,13 @@ class ShoppersCoverageCalculator
 /**
  * Test class, just overrides the 'haversine' method
  */
+
 class TestShoppersCoverageCalculator extends ShoppersCoverageCalculator
 {
-    public function haversine($lat1, $lng1, $lat2, $lng2) {
+    static public function haversine($lat1, $lng1, $lat2, $lng2) {
         static $numCalls = 0;
         
-        return ( $numCalls++ % 3 ) * $this->coverageMaxDistance;
+        return ( $numCalls++ % 3 ) * ShoppersCoverageCalculator::COVERAGE_MAX_DISTANCE;
     }
 }
 
