@@ -18,10 +18,12 @@
         ['id' => 'S7', 'lat' => 45.34, 'lng' => 10.94, 'enabled' => true] // valid locations = 1
     ];
     //////////////////////////////
-    include_once(__DIR__.'/haversine.php');
-    include_once(__DIR__.'/haversine_coverage.php');
+    include_once(__DIR__.'/../haversine.php');
+    include_once(__DIR__.'/../haversine_coverage.php');
     
     // values tested at:
     // https://www.vcalc.com/wiki/vCalc/Haversine+-+Distance
     assert(16.439 - haversine(45.35, 10.84, 45.34, 10.63) < .00001 );
     assert(764.155 - haversine(45.35, 10.84, 45.34, 20.63) < .00001 );
+
+    echo 'No failed assertions' . PHP_EOL;
