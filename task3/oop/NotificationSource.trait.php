@@ -15,7 +15,7 @@ trait TNotificationSource
         }
 
         foreach ( $this->notificationHandlers[$notificationName] as $callback ) {
-            $callback($notificationName, $notification);
+            $callback($notification, $notificationName);
         }
     }
 }

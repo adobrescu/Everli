@@ -104,11 +104,11 @@ class ShoppersCoverageCalculator
     }
     
     // Repository notification handlers
-    public function onCreateShopper($notificationName, $shopper) {
+    public function onCreateShopper($shopper) {
         $this->calculateShopperCoveredLocationIds($shopper);
     }
 
-    public function onUpdateShopper($notificationName, $records) {
+    public function onUpdateShopper($records) {
         $oldShopper = $records[0];
         $shopper = $records[1];
 
@@ -123,12 +123,12 @@ class ShoppersCoverageCalculator
         }
     }
 
-    public function onDeleteShopper($notificationName, $shopper) {
+    public function onDeleteShopper($shopper) {
         $shopperId = $shopper['id'];
         unset($this->shoppersCoveredLocationIds[$shopperId]);
     }
 
-    public function onCreateLocation($notificationName, $location) {        
+    public function onCreateLocation($location) {
         foreach ( $this->shoppers->readAll() as $shopper ) {
             if (!$shopper['enabled'] ) {
                 continue;
@@ -146,7 +146,7 @@ class ShoppersCoverageCalculator
         
     }
     
-    public function onUpdateLocation($notificationName, $records) {
+    public function onUpdateLocation($records) {
         $oldLocation = $records[0];
         $location = $records[1];
 
@@ -174,7 +174,7 @@ class ShoppersCoverageCalculator
         }
     }
 
-    public function onDeleteLocation($notificationName, $location) {
+    public function onDeleteLocation($location) {
         $locationId = $location['id'];
 
         foreach ( $this->shoppers->readAll() as $shopper ) {
