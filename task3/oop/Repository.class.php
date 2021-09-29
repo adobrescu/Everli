@@ -22,8 +22,8 @@ class Repository implements IRepository
         return (int) key(end($this->records));
     }
     
-    function deleteRecord(int $id) {
-        unset($this->records[$id]);
+    function deleteRecord(int $key) {
+        unset($this->records[$key]);
     }
 
     function readAll() {
