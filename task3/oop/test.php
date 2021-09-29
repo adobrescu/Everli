@@ -36,6 +36,14 @@ class ShoppersCoverageCalculator
         $this->shoppers = $shoppers;
         $this->locations = $locations;
         $this->coverageMaxDistance = $coverageMaxDistance;
+        
+        $this->shoppers->registerNotificationHandler('create', [$this, 'onCreateShopper']);
+        $this->shoppers->registerNotificationHandler('update', [$this, 'onUpdateShopper']);
+        $this->shoppers->registerNotificationHandler('delete', [$this, 'onDeleteShopper']);
+
+        $this->locations->registerNotificationHandler('create', [$this, 'onCreateLocation']);
+        $this->locations->registerNotificationHandler('update', [$this, 'onUpdateLocation']);
+        $this->locations->registerNotificationHandler('delete', [$this, 'onDeleteLocation']);
 
         foreach ($this->shoppers->readAll() as $shopper ) {
             $this->calculateShopperCoveredLocationIds($shopper);
@@ -101,6 +109,28 @@ class ShoppersCoverageCalculator
     }
     static public function haversine($lat1, $lng1, $lat2, $lng2) {
 
+    }
+    // Repository notification handlers
+    public function onCreateShopper($shopper) {
+    }
+
+    public function onUpdateShopper($records) {
+        $oldShopper = $records[0];
+        $shopper = $records[1];
+    }
+
+    public function onDeleteShopper($shopper) {
+    }
+
+    public function onCreateLocation($location) {
+    }
+    
+    public function onUpdateLocation($records) {
+        $oldLocation = $records[0];
+        $location = $records[1];
+    }
+
+    public function onDeleteLocation($location) {
     }
 }
 
