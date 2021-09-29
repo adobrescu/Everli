@@ -11,6 +11,8 @@ interface IRepository
     function deleteRecord(int $id);
 
     function readAll();
+
+    function countAll();
 }
 
 interface IObservableRepository extends INotificationSource, IRepository
