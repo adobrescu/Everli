@@ -1,17 +1,21 @@
 # Everli
 
 TASK 1  
+  
 !! My notes  
+  
 Task 1 implements 2 versions of a function called "reverseBinary" - one implemented using bitwise operators (in reverse_binary.js), and the second one using strings and arrays (reverse_binary_using_arrays.js)  
   
 To run the tests from command line (assuming nodejs installed):  
   
 cd Everli/task1/tests/ ; node ./tests.js ; node ./tests_arrays.js  
   
-To run in browser open Everli/task1/index.html and view results in console output.  
+To run in browser open Everli/task1/index.html and view results in console output. 
+   
 !!  
   
-- Language: Javascript  
+- Language:  
+Javascript  
   
 - Description:  
 Write a function for reversing numbers in binary. For instance, the binary representation of 13 is 1101, and reversing it gives 1011, which corresponds to number 11.  
@@ -24,16 +28,16 @@ TASK 2
   
 !! My notes  
 
-Class definition can be found in change_directory.php:  
+Path class definition can be found in change_directory.php:  
   
-To tun the tests (assuming Everli/task2/tests/test.php has execution permissions and PHP cli installed):  
+To run the tests (assuming Everli/task2/tests/test.php has execution permissions and PHP CLI installed):  
 
 cd Everli/task2/tests ; ./test.php;  
   
 Or (assuming that PHP CLI installed and in PATH):  
   
-  cd Everli/task2/tests ; php ./test.php;
-
+cd Everli/task2/tests ; php ./test.php;  
+  
 !!  
   
 - Language: PHP  
@@ -41,18 +45,18 @@ Or (assuming that PHP CLI installed and in PATH):
 - Description:  
 Write a function that provides change directory (cd) function for an abstract file system.  
 Notes:  
-root path is '/'.  
-path separator is '/'.  
-parent directory is addressable as '..'.  
-directory names consist only of English alphabet letters (A-Z and a-z).  
+- root path is '/'.  
+- path separator is '/'.  
+- parent directory is addressable as '..'.  
+- directory names consist only of English alphabet letters (A-Z and a-z).  
 the function will not be passed any invalid paths.  
-do not use built-in path-related functions.  
+- do not use built-in path-related functions.  
   
 - For example:  
 $path = new Path('/a/b/c/d');  
 $path->cd('../x');  
 echo $path->currentPath;  
-should display '/a/b/c/x'.  
+//should display '/a/b/c/x'.  
   
 - How To Submit:  
 Complete the source file named `change_directory.php`.  
@@ -69,7 +73,7 @@ The function that implements coverages calculation (calculateEnabledShoppersCove
 - it expects that a function called 'haversine' is already defined;  
   
 2. A second one, OOP oriented using classes and interfaces, has multiple source files found in task3/oop/.  
-The requirement is implemented in ShoppersCoverageCalculator class and exposed by ShoppersCoverageCalculator::getAllShoppersCoverage public methods.  
+The requirement is implemented in ShoppersCoverageCalculator class and exposed by ShoppersCoverageCalculator::getAllShoppersCoverage public method.  
   
 The requirement is implemented by a few classes by following repository-like and event driven-like patterns.   
 
@@ -79,7 +83,7 @@ The requirement is implemented by a few classes by following repository-like and
   
 - Description:  
 Suppose you have:  
-a `haversine(lat1, lng1, lat2, lng2)` function that returns the distance (measured in km) between the coordinates of two given geographic point (lat and lng are latitude and longitude)
+- a `haversine(lat1, lng1, lat2, lng2)` function that returns the distance (measured in km) between the coordinates of two given geographic point (lat and lng are latitude and longitude)
 an array of geographical zones (`locations`):  
 	$locations = [  
     	  ['id' => 1000, 'zip_code' => '37069', 'lat' => 45.35, 'lng' => 10.84],  
@@ -89,7 +93,7 @@ an array of geographical zones (`locations`):
   ...   
     	];  
   
-an array of shoppers:  
+- an array of shoppers:  
   
 $shoppers = [  
     ['id' => 'S1', 'lat' => 45.46, 'lng' => 11.03, 'enabled' => true],  
