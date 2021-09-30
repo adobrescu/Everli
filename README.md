@@ -24,13 +24,15 @@ TASK 2
   
 !! My notes  
 
-To run the code (class definition + tests) if change_directory.php has exec permissions:
+Class definition can be found in change_directory.php:  
   
-cd Everli/task2/ ; ./change_directory.php;  
+To tun the tests (assuming Everli/task2/tests/test.php has execution permissions and PHP cli installed):  
+
+cd Everli/task2/tests ; ./test.php;  
   
 Or (assuming that PHP CLI installed and in PATH):  
   
-  cd Everli/task2/ ; php ./change_directory.php;
+  cd Everli/task2/tests ; php ./test.php;
 
 !!  
   
