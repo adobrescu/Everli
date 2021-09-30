@@ -12,8 +12,8 @@
  * @returns 
  */
 function reverseBinary(n) {
-    if ( typeof(n) != "number" ) {
-        throw new Error("reverseBinary: given parameter must be a number");
+    if ( typeof(n) != "number" || !Number.isInteger(n) ) {
+        throw new Error("reverseBinary: given parameter must be an integer");
     }
     //@tbd is next validation needed?!
     if ( n < 0) {
